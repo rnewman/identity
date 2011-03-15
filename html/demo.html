@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login page</title>
+  </head>
+  <body>
+    <h1>Testing verified email.</h1>
+    <p>Note that this will only work if your popup blocker is disabled!</p>
+    <p id="output">Output: </p>
+    <script type="text/javascript" src="../js/wrapper.js"></script>
+    <script type="text/javascript">
+      console.log("Loaded wrapper page.");
+      function append(m) {
+        var txt = document.createTextNode(m);
+        var out = document.getElementById("output");
+        out.appendChild(txt);
+      }
+
+      function callback(m) {
+        append(JSON.stringify(m));
+      }
+
+      try {
+        navigator.id.getVerifiedEmail(callback);
+      } catch (ex) {
+        append(ex);
+      }
+    </script>
+  </body>
+</html>
+
