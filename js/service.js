@@ -294,8 +294,9 @@ var IdentityService = function() {
         }
       }
 
+      var loginURL = this.identityBaseURL + "login?audience=" + encodeURIComponent(origin(m));
       this.createPopup(m.source,
-                       this.identityBaseURL + "login",
+                       loginURL,
                        handlePopupMessage,
                        origin(m));
     }
