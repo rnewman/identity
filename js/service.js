@@ -63,8 +63,10 @@ var IdentityService = function() {
   // Copy operation, success, and error items into a response object.
   function buildResponse(from, op, to) {
     to.operation = op;
-    if (!(to.success = from.success))
-      to.error = from.error;
+    if (!(to.success = (from.success && from.responseJSON.success)))
+      if (from.responseJSON)
+        to.error = from.responseJSON.error;
+    log("Response object: " + JSON.stringify(to));
     return to;
   }
 
@@ -201,7 +203,7 @@ var IdentityService = function() {
         try {
           log("Response was " + req.responseText);
           req.responseJSON = JSON.parse(req.responseText);
-          req.success = req.responseJSON && (req.status == 200);
+          req.success = (req.status == 200) && req.responseJSON;
         } catch (ex) {
           // Probably a failure; nothing to do here.
         }
