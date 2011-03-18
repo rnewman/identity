@@ -1,3 +1,5 @@
 .*.sw*
 .sw*
 *~
+tests/*.log
+tools/*.pyc
