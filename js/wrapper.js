@@ -53,7 +53,8 @@
   // This avoids errors like "attempt to run compile-and-go script on a cleared
   // scope".
   if (navigator.id) {
-    if (navigator.id.isInjected) {
+    if (navigator.id.isInjected &&
+        navigator.id.unhook) {
       // Remove the existing object and its handlers.
       log("Unhooking existing navigator.id.");
       navigator.id.unhook();
